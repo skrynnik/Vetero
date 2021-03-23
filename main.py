@@ -34,7 +34,7 @@ def weather(message):
 
     # Get temperature
     temp = weather.get_temperature('celsius')
-    temp = {round(float(temp[i])) for i in temp}
+    temp = {round(float(str(temp[i]))) for i in temp}
     res += 'Средняя температура ' + str(temp['temp']) + '°C\n'
     if temp['temp_max'] != temp['temp']:
         res += 'Максимальная температура ' + str(temp['temp_max']) + '°C\n'
