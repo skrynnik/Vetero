@@ -34,11 +34,13 @@ def weather(message):
 
     # Get temperature
     temp = weather.get_temperature('celsius')
-    res += 'Средняя температура ' + str(temp['temp']) + '°C\n'
+    temp.pop('temp_kf')
+    temp = {elem: str(round(temp[elem] / 5, 1) * 5) for elem in temp}
+    res += 'Средняя температура: ' + temp['temp'] + '°C'
     if temp['temp_max'] != temp['temp']:
-        res += 'Максимальная температура ' + str(temp['temp_max']) + '°C\n'
+        res += '\n' + 'Максимальная температура: ' + temp['temp_max'] + '°C'
     if temp['temp_min'] != temp['temp']:
-        res += 'Минимальная температур ' + str(temp['temp_min']) + '°C\n'
+        res += '\n' + 'Минимальная температура: ' + temp['temp_min'] + '°C'
 
     # Send results
     bot.send_message(message.chat.id, res)
