@@ -1,2 +1,1 @@
-# vetero
-Weather bot on Telegram
+# weather-bot
