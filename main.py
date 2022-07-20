@@ -23,7 +23,7 @@ def main():
         try:
             owm.weather_at_place(message.text)
         except pyowm.exceptions.api_response_error.NotFoundError:
-            bot.send_message(message.chat.id, 'Такого города не существует')
+            bot.send_message(message.chat.id, 'Такого города не существует (вообще)')
             return
 
         weather = owm.weather_at_place(message.text).get_weather()
