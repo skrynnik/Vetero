@@ -8,11 +8,13 @@ import pyowm
 
 
 TelebotToken = os.environ['TelebotToken']
+
 bot = telebot.TeleBot(TelebotToken)
 
 OWMToken = os.environ['OWMToken']
 owm = pyowm.OWM(OWMToken)
 owm.set_language('ru')
+
 
 @bot.message_handler(commands=['start'])
 def start(message):
@@ -20,6 +22,7 @@ def start(message):
     Reaction on the start command
     '''
     bot.send_message(message.chat.id, 'Введите название города')
+
 
 @bot.message_handler(content_types=['text'])
 def show_weather(message):
@@ -41,11 +44,11 @@ def show_weather(message):
     temp = {elem: str(round(temp[elem] / 5, 1) * 5) for elem in temp}
     res += 'Средняя температура: ' + temp['temp'] + '°C'
     if temp['temp_max'] != temp['temp']:
-        res += '\n' + 'Максимальная температура: ' + \
-            temp['temp_max'] + '°C'
+        res += '\n' + 'Максимальная температура: ' + temp['temp_max'] + '°C'
     if temp['temp_min'] != temp['temp']:
         res += '\n' + 'Минимальная температура: ' + temp['temp_min'] + '°C'
 
     bot.send_message(message.chat.id, res)
+
 
 bot.polling(none_stop=True)
